@@ -175,10 +175,9 @@ void MainWindow::on_query_timne_out()
 void MainWindow::on_12306_load_completed()
 {
     qDebug() << "MainWindow" << __FUNCTION__;
-    if(!queryTimer || queryTimer->isActive())
+    if(!queryTimer || !queryTimer->isActive())
         return;
 
-    playVoice(true);
     if(!havSuccessQuery)
     {
         web12306Widget->start();
@@ -208,6 +207,7 @@ void MainWindow::on_trips_status(const QString& source, const QString& dest, con
     ui->label_StatusDate->setText(canBuy ? "可以预定" : "列车运行图调整,暂停发售");
     if(canBuy)
     {
+        playVoice(true);
         ui->widget_Result->setStyleSheet("background-color: #ff0000;");
 
         Qt::WindowFlags flags = windowFlags();
