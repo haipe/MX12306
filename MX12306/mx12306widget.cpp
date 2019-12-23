@@ -1,4 +1,4 @@
-#include "mx12306widget.h"
+﻿#include "mx12306widget.h"
 #include <QJsonDocument>
 #include <QJsonParseError>
 #include <QJsonObject>
@@ -33,6 +33,12 @@ void MX12306Widget::start(const QString &url)
 void MX12306Widget::start()
 {
     loadUrl(request_url);
+}
+
+void MX12306Widget::closeEvent(QCloseEvent *event)
+{
+    this->hide();
+    event->ignore();
 }
 
 void MX12306Widget::onDocumentReady()

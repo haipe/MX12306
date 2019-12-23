@@ -20,6 +20,8 @@ signals:
     void onTripsStatusSignal(const QString& source, const QString& dest, const QString& day, const QString& trips, bool isCanBuy);
 
 protected:
+    virtual void closeEvent(QCloseEvent *event);
+
     // 回调：文档加载成功
     virtual void onDocumentReady();
     virtual bool onLoadUrlBegin(const QString& url, void *job);

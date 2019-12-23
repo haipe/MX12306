@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     updateStatus("Ready");
 
     setWindowTitle(QString::fromLocal8Bit("MX12306 列车运行图调整 监控"));
-    //ui->centralwidget->layout()->setAlignment(Qt::AlignTop);
+    ui->centralwidget->layout()->setAlignment(Qt::AlignTop);
     //ui->verticalLayout_Result->setAlignment(Qt::AlignTop);
 
     ui->lineEdit_From->setText(QString::fromLocal8Bit("广州南"));
@@ -29,9 +29,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->spinBox_QueryTimeData->setValue(5);
     ui->widget_QueryConfig->hide();
 
-    web12306Widget = new MX12306Widget(ui->centralwidget,"https://www.12306.cn/index/index.html");
+    web12306Widget = new MX12306Widget(nullptr,"https://www.12306.cn/index/index.html");
     //ui->verticalLayout_Result->addWidget(web12306Widget);
-    ui->centralwidget->layout()->addWidget(web12306Widget);
+    //ui->centralwidget->layout()->addWidget(web12306Widget);
     web12306Widget->hide();
 
     QObject::connect(web12306Widget,SIGNAL(onLoadUrlCompleted()),this,SLOT(on_12306_load_completed()),Qt::QueuedConnection);
@@ -48,6 +48,15 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    web12306Widget->hide();
+    web12306Widget->close();
+    delete  web12306Widget;
+
+    event->accept();
 }
 
 void MainWindow::updateStatus(const QString &msg)
@@ -138,13 +147,13 @@ void MainWindow::on_checkBox_Debug_clicked(bool checked)
     {
         web12306Widget->show();
         //ui->centralwidget->layout()->addWidget(web12306Widget);
-        showMaximized();
+        //showMaximized();
     }
     else
     {
         web12306Widget->hide();
         //ui->centralwidget->layout()->removeWidget(web12306Widget);
-        showNormal();
+        //showNormal();
     }
 }
 
@@ -210,7 +219,7 @@ void MainWindow::on_trips_status(const QString& source, const QString& dest, con
         playVoice(true);
         ui->widget_Result->setStyleSheet("background-color: #ff0000;");
 
-        Qt::WindowFlags flags = windowFlags();
-        setWindowFlags(flags | Qt::WindowStaysOnTopHint);
+        //Qt::WindowFlags flags = windowFlags();
+        //setWindowFlags(flags | Qt::WindowStaysOnTopHint);
     }
 }

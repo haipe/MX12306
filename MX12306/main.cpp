@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 
 #include <QApplication>
 
@@ -18,5 +18,5 @@ int main(int argc, char *argv[])
 
     mxtoolkit::MiniBlinkWidget::wkeFinal();
 
-    return a.exec();
+    return ret;
 }

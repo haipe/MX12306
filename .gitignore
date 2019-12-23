@@ -37,4 +37,4 @@ cookies.dat
 bin/
 localStorage/
 .vs/
- 
+build-*/

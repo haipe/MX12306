@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_H
+﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -22,6 +22,7 @@ public:
 
 protected slots:
 protected:
+    void closeEvent(QCloseEvent *event);
     void updateStatus(const QString& msg);
     void restartQueryTimer();
     void playVoice(bool play);
