@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "_mx_qt_include.h"
 #include "mx12306widget.h"
@@ -15,12 +15,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     updateStatus("Ready");
 
-    setWindowTitle("MX12306 列车调整监控");
+    setWindowTitle(QString::fromLocal8Bit("MX12306 列车运行图调整 监控"));
     //ui->centralwidget->layout()->setAlignment(Qt::AlignTop);
     //ui->verticalLayout_Result->setAlignment(Qt::AlignTop);
 
-    ui->lineEdit_From->setText("广州南");
-    ui->lineEdit_To->setText("三江南");
+    ui->lineEdit_From->setText(QString::fromLocal8Bit("广州南"));
+    ui->lineEdit_To->setText(QString::fromLocal8Bit("三江南"));
     ui->lineEdit_Code->setText("D1826");
     ui->dateEdit_Day->setDisplayFormat("yyyy-MM-dd");
     ui->dateEdit_Day->setDate(QDate::currentDate().addDays(29));
@@ -204,7 +204,7 @@ void MainWindow::on_trips_status(const QString& source, const QString& dest, con
     ui->label_DayDate->setText(day);
     ui->label_SourceDate->setText(source);
     ui->label_DestDate->setText(dest);
-    ui->label_StatusDate->setText(canBuy ? "可以预定" : "列车运行图调整,暂停发售");
+    ui->label_StatusDate->setText(QString::fromLocal8Bit(canBuy ? "可以预定" : "列车运行图调整,暂停发售"));
     if(canBuy)
     {
         playVoice(true);

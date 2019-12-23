@@ -1,4 +1,4 @@
-#ifndef MX12306WIDGET_H
+﻿#ifndef MX12306WIDGET_H
 #define MX12306WIDGET_H
 
 #include "miniblinkwidget.h"
