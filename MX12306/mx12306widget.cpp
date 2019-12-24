@@ -43,7 +43,7 @@ void MX12306Widget::closeEvent(QCloseEvent *event)
 
 void MX12306Widget::onDocumentReady()
 {
-    emit onLoadUrlCompleted();
+    mxtoolkit::MiniBlinkWidget::onDocumentReady();
 }
 
 bool MX12306Widget::onLoadUrlBegin(const QString& url, void *job)

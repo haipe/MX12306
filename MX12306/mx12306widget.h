@@ -14,9 +14,8 @@ public:
     void start();
 
 public:
-    //自定义信号
 signals:
-    void onLoadUrlCompleted();
+    //自定义信号
     void onTripsStatusSignal(const QString& source, const QString& dest, const QString& day, const QString& trips, bool isCanBuy);
 
 protected:
