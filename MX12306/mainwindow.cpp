@@ -113,17 +113,19 @@ void MainWindow::playVoice(bool play)
 
 void MainWindow::on_pushButton_Doit_clicked()
 {
-    playVoice(false);
-    if(queryTimer && queryTimer->isActive())
+    if((queryTimer && queryTimer->isActive()) || (playMusic && playMusic->isPlaying()))
     {
+        playVoice(false);
         ui->pushButton_Doit->setText("Start");
 
         havSuccessQuery = true;
         queryTimer->stop();
+
         updateStatus("Ready");
     }
     else
     {
+        playVoice(false);
         ui->pushButton_Doit->setText("Stop");
 
         QString src = ui->lineEdit_From->text();
@@ -193,15 +195,16 @@ void MainWindow::on_12306_load_completed()
     }
     else
     {
-        updateStatus("Have Error.");
+        if(!playMusic || !playMusic->isPlaying())
+            updateStatus("Have Error.");
     }
 }
 
-void MainWindow::on_trips_status(const QString& source, const QString& dest, const QString& day, const QString &trips, bool canBuy)
+void MainWindow::on_trips_status(
+        const QString& source, const QString& dest, const QString& day, const QString &trips, bool canBuy)
 {
     qDebug() << "MainWindow" << __FUNCTION__;
     havSuccessQuery = true;
-    updateStatus("Query once.");
 
     ui->lineEdit_From->setText(source);
     ui->lineEdit_To->setText(dest);
@@ -217,9 +220,14 @@ void MainWindow::on_trips_status(const QString& source, const QString& dest, con
     if(canBuy)
     {
         playVoice(true);
+        queryTimer->stop();
         ui->widget_Result->setStyleSheet("background-color: #ff0000;");
 
         //Qt::WindowFlags flags = windowFlags();
         //setWindowFlags(flags | Qt::WindowStaysOnTopHint);
+    }
+    else
+    {
+        updateStatus("Query once.");
     }
 }
